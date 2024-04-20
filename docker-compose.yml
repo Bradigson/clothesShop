@@ -1,0 +1,26 @@
+version: "3"
+services: 
+  db:
+    container_name: cloth-chop-db
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: clothes279527
+      POSTGRES_USER: clotheShop
+      POSTGRES_DB: clothesShop
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  app:
+    container_name: clothes-app
+    restart: always
+    build: . 
+    ports:
+      - 2000:2000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db 
+volumes:
+  pgdata: 
